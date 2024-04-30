@@ -19,12 +19,39 @@ def read_data_from_mongodb(collection):
 # Insertar datos en Neo4j
 def insert_data_into_neo4j(session, data):
     for item in data:
-        print(item)
-        # Aquí puedes adaptar la consulta según la estructura de tus datos y cómo quieres modelarlos en Neo4j
-        query = """
-        CREATE (n:Node {id: $id, name: $name})
-        """
-        session.run(query, id=item['_id'], name=item['name'])
+        session.run("""
+        MERGE (u:Usuario {id_usuario: $Usuario.id_usuario})
+        ON CREATE SET u.nombre = $Usuario.nombre, u.direccion = $Usuario.direccion, u.telefono = $Usuario.telefono, u.email = $Usuario.email
+
+        MERGE (t:Transaccion {id_transaccion: $Transaccion.id_transaccion})
+        ON CREATE SET t.monto = $Transaccion.monto, t.fecha_hora = $Transaccion.fecha_hora, t.tipo_transaccion = $Transaccion.tipo_transaccion, 
+                        t.ubicacion = $Transaccion.ubicacion, t.dispositivo_usado = $Transaccion.dispositivo_usado
+
+        MERGE (c1:Cuenta {id_cuenta: $Cuenta.id_cuenta})
+        ON CREATE SET c1.tipo_cuenta = $Cuenta.tipo_cuenta, c1.fecha_creacion = $Cuenta.fecha_creacion
+
+        MERGE (c2:Cuenta {id_cuenta: $Transaccion.cuenta_destino})
+
+        MERGE (d:Dispositivo {id_dispositivo: $Dispositivo.id_dispositivo})
+        ON CREATE SET d.tipo_dispositivo = $Dispositivo.tipo_dispositivo, d.ubicacion_registrada = $Dispositivo.ubicacion_registrada
+
+        MERGE (l:Ubicacion {ciudad: $Ubicacion.ciudad})
+        ON CREATE SET l.pais = $Ubicacion.pais, l.coordenadas = $Ubicacion.coordenadas
+
+        // Crear relaciones
+        MERGE (u)-[:REALIZA]->(t)
+        MERGE (t)-[:DESDE_CUENTA]->(c1)
+        MERGE (t)-[:A_CUENTA]->(c2)
+        MERGE (u)-[:POSEE]->(c1)
+        MERGE (t)-[:UTILIZA]->(d)
+        """, {
+            "Usuario": item['Usuario'],
+            "Transaccion": item['Transaccion'],
+            "Cuenta": item['Cuenta'],
+            "Dispositivo": item['Dispositivo'],
+            "Ubicacion": item['Ubicacion']
+        })
+
 
 def main():
     # Conectarse a MongoDB
@@ -41,3 +68,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+
