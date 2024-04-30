@@ -1,0 +1,332 @@
+[
+    {
+        "Transaccion": {
+            "id_transaccion": "TX921332168",
+            "monto": 3232.69,
+            "fecha_hora": "2023-10-17T19:37:24.571912",
+            "tipo_transaccion": "dep\u00f3sito",
+            "ubicacion": "Thompsonhaven",
+            "dispositivo_usado": "DISP270",
+            "cuenta_destino": "AC541114270"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC391261482",
+            "tipo_cuenta": "cuenta corriente",
+            "fecha_creacion": "2023-04-22T19:37:24.572262"
+        },
+        "Usuario": {
+            "id_usuario": "USR92918",
+            "nombre": "Malik Rivera",
+            "direccion": "86140 Moore Skyway Apt. 475\nRobersonburgh, VT 82031",
+            "telefono": "+1-453-535-2867x797",
+            "email": "camachoashley@example.com"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP7943",
+            "tipo_dispositivo": "tablet",
+            "ubicacion_registrada": "Valentinemouth"
+        },
+        "Ubicacion": {
+            "ciudad": "Abigailshire",
+            "pais": "Libyan Arab Jamahiriya",
+            "coordenadas": "81.694773,-99.009619"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX127609300",
+            "monto": 4002.42,
+            "fecha_hora": "2023-08-09T19:37:24.574092",
+            "tipo_transaccion": "retiro",
+            "ubicacion": "East Danielbury",
+            "dispositivo_usado": "DISP9110",
+            "cuenta_destino": "AC732414087"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC255056235",
+            "tipo_cuenta": "cuenta empresarial",
+            "fecha_creacion": "2022-12-09T19:37:24.574219"
+        },
+        "Usuario": {
+            "id_usuario": "USR92017",
+            "nombre": "Melinda King",
+            "direccion": "516 Ramirez Club Suite 767\nSouth Tommy, NJ 71243",
+            "telefono": "720-604-6035",
+            "email": "davidsantiago@example.com"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP4870",
+            "tipo_dispositivo": "computadora",
+            "ubicacion_registrada": "West Amy"
+        },
+        "Ubicacion": {
+            "ciudad": "New Sarahview",
+            "pais": "Timor-Leste",
+            "coordenadas": "-49.9416005,-41.435538"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX286464178",
+            "monto": 5676.97,
+            "fecha_hora": "2023-05-21T19:37:24.575202",
+            "tipo_transaccion": "dep\u00f3sito",
+            "ubicacion": "North Chadshire",
+            "dispositivo_usado": "DISP5179",
+            "cuenta_destino": "AC395453001"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC419114748",
+            "tipo_cuenta": "cuenta corriente",
+            "fecha_creacion": "2019-08-17T19:37:24.575315"
+        },
+        "Usuario": {
+            "id_usuario": "USR70073",
+            "nombre": "Paul Martinez",
+            "direccion": "0138 Rodriguez Ramp Suite 340\nWalkerport, NC 69008",
+            "telefono": "975-440-1408x87010",
+            "email": "davewilson@example.net"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP3264",
+            "tipo_dispositivo": "tablet",
+            "ubicacion_registrada": "New Alexborough"
+        },
+        "Ubicacion": {
+            "ciudad": "East Edwardstad",
+            "pais": "Falkland Islands (Malvinas)",
+            "coordenadas": "-84.0322165,-129.800281"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX801948081",
+            "monto": 1554.57,
+            "fecha_hora": "2024-03-09T19:37:24.576228",
+            "tipo_transaccion": "pago",
+            "ubicacion": "North William",
+            "dispositivo_usado": "DISP7531",
+            "cuenta_destino": "AC251115357"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC721067639",
+            "tipo_cuenta": "cuenta de ahorros",
+            "fecha_creacion": "2022-01-08T19:37:24.576331"
+        },
+        "Usuario": {
+            "id_usuario": "USR24719",
+            "nombre": "William Santiago",
+            "direccion": "521 Thomas Manor Apt. 062\nJohnhaven, WV 10212",
+            "telefono": "951.679.3589x70120",
+            "email": "cooperjustin@example.com"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP5127",
+            "tipo_dispositivo": "tablet",
+            "ubicacion_registrada": "New Mitchellmouth"
+        },
+        "Ubicacion": {
+            "ciudad": "Floresfurt",
+            "pais": "Malaysia",
+            "coordenadas": "-61.511552,20.562992"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX689905919",
+            "monto": 6235.83,
+            "fecha_hora": "2024-03-06T19:37:24.577288",
+            "tipo_transaccion": "retiro",
+            "ubicacion": "South Sarah",
+            "dispositivo_usado": "DISP1077",
+            "cuenta_destino": "AC703802512"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC979928248",
+            "tipo_cuenta": "cuenta empresarial",
+            "fecha_creacion": "2023-01-10T19:37:24.577397"
+        },
+        "Usuario": {
+            "id_usuario": "USR14352",
+            "nombre": "Andrea Hobbs",
+            "direccion": "786 Nicole Circles Suite 358\nWest Jamie, RI 21272",
+            "telefono": "9238195439",
+            "email": "qharper@example.org"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP2835",
+            "tipo_dispositivo": "tablet",
+            "ubicacion_registrada": "New Justinborough"
+        },
+        "Ubicacion": {
+            "ciudad": "North Timothychester",
+            "pais": "Falkland Islands (Malvinas)",
+            "coordenadas": "-0.1453155,131.269073"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX357750401",
+            "monto": 2614.99,
+            "fecha_hora": "2024-04-20T19:37:24.578246",
+            "tipo_transaccion": "pago",
+            "ubicacion": "Campbellmouth",
+            "dispositivo_usado": "DISP415",
+            "cuenta_destino": "AC319958582"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC714255537",
+            "tipo_cuenta": "cuenta de ahorros",
+            "fecha_creacion": "2022-04-24T19:37:24.578389"
+        },
+        "Usuario": {
+            "id_usuario": "USR58023",
+            "nombre": "Joshua Price",
+            "direccion": "179 Ryan Groves\nPhamchester, CO 96125",
+            "telefono": "496-395-9451x9557",
+            "email": "jamie92@example.com"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP1345",
+            "tipo_dispositivo": "computadora",
+            "ubicacion_registrada": "Ronnieville"
+        },
+        "Ubicacion": {
+            "ciudad": "Wallaceside",
+            "pais": "Colombia",
+            "coordenadas": "-37.0927665,-101.006336"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX583422187",
+            "monto": 7389.63,
+            "fecha_hora": "2023-05-15T19:37:24.579177",
+            "tipo_transaccion": "dep\u00f3sito",
+            "ubicacion": "Paulburgh",
+            "dispositivo_usado": "DISP6933",
+            "cuenta_destino": "AC416692253"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC221861047",
+            "tipo_cuenta": "cuenta corriente",
+            "fecha_creacion": "2020-04-13T19:37:24.579285"
+        },
+        "Usuario": {
+            "id_usuario": "USR62141",
+            "nombre": "Andrea Martin",
+            "direccion": "512 Joseph Crescent\nSierramouth, ME 94077",
+            "telefono": "001-241-805-5595x64299",
+            "email": "kimberlythomas@example.net"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP3044",
+            "tipo_dispositivo": "tel\u00e9fono",
+            "ubicacion_registrada": "North Vicki"
+        },
+        "Ubicacion": {
+            "ciudad": "Burnsberg",
+            "pais": "Jordan",
+            "coordenadas": "41.8011465,-75.059864"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX448320806",
+            "monto": 4797.9,
+            "fecha_hora": "2023-12-03T19:37:24.580150",
+            "tipo_transaccion": "pago",
+            "ubicacion": "West Johnborough",
+            "dispositivo_usado": "DISP4864",
+            "cuenta_destino": "AC478190881"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC133870043",
+            "tipo_cuenta": "cuenta corriente",
+            "fecha_creacion": "2021-03-12T19:37:24.580258"
+        },
+        "Usuario": {
+            "id_usuario": "USR82227",
+            "nombre": "Jonathan Perez",
+            "direccion": "60455 Thompson Manors Apt. 947\nEast Matthewshire, VA 57126",
+            "telefono": "+1-651-902-6368x628",
+            "email": "nyoung@example.org"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP2843",
+            "tipo_dispositivo": "tablet",
+            "ubicacion_registrada": "Kimberlyberg"
+        },
+        "Ubicacion": {
+            "ciudad": "South Marissaberg",
+            "pais": "Latvia",
+            "coordenadas": "-31.534308,-141.371150"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX892737402",
+            "monto": 2132.1,
+            "fecha_hora": "2023-06-10T19:37:24.581061",
+            "tipo_transaccion": "transferencia",
+            "ubicacion": "Monroeborough",
+            "dispositivo_usado": "DISP1912",
+            "cuenta_destino": "AC356286083"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC520545801",
+            "tipo_cuenta": "cuenta de ahorros",
+            "fecha_creacion": "2021-02-18T19:37:24.581195"
+        },
+        "Usuario": {
+            "id_usuario": "USR57487",
+            "nombre": "Mandy Sullivan",
+            "direccion": "07690 Jennifer Union\nKaylabury, SC 42643",
+            "telefono": "+1-564-285-9954x3844",
+            "email": "odudley@example.org"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP2769",
+            "tipo_dispositivo": "tel\u00e9fono",
+            "ubicacion_registrada": "Michaelhaven"
+        },
+        "Ubicacion": {
+            "ciudad": "West Stephanie",
+            "pais": "British Virgin Islands",
+            "coordenadas": "31.6008975,-71.164342"
+        }
+    },
+    {
+        "Transaccion": {
+            "id_transaccion": "TX781819645",
+            "monto": 8946.1,
+            "fecha_hora": "2024-02-24T19:37:24.581938",
+            "tipo_transaccion": "pago",
+            "ubicacion": "Port Claudia",
+            "dispositivo_usado": "DISP5992",
+            "cuenta_destino": "AC978699651"
+        },
+        "Cuenta": {
+            "id_cuenta": "AC296634649",
+            "tipo_cuenta": "cuenta corriente",
+            "fecha_creacion": "2019-08-26T19:37:24.582038"
+        },
+        "Usuario": {
+            "id_usuario": "USR38253",
+            "nombre": "Travis Ramirez",
+            "direccion": "210 Rasmussen Locks Apt. 280\nRobertborough, MD 31286",
+            "telefono": "749-684-7937x465",
+            "email": "murphyalyssa@example.org"
+        },
+        "Dispositivo": {
+            "id_dispositivo": "DISP8773",
+            "tipo_dispositivo": "tel\u00e9fono",
+            "ubicacion_registrada": "Ronaldhaven"
+        },
+        "Ubicacion": {
+            "ciudad": "Laneview",
+            "pais": "Lao People's Democratic Republic",
+            "coordenadas": "56.0933445,-49.385846"
+        }
+    }
+]
