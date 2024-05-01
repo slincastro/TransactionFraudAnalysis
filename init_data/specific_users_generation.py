@@ -17,7 +17,7 @@ def generate_user():
     return {
         "id_usuario": "USR" + str(random.randint(10000, 99999)),
         "nombre": fake.name(),
-        "direccion": fake.address(),
+        "direccion": generate_location(),
         "telefono": fake.phone_number(),
         "email": fake.email()
     }
@@ -33,7 +33,7 @@ def generate_transaction(usuario, cuenta):
         "monto": round(random.uniform(100, 10000), 2),
         "fecha_hora": (datetime.now() - timedelta(days=random.randint(1, 365))).isoformat(),
         "tipo_transaccion": random.choice(tipos_transaccion),
-        "ubicacion": fake.city(),
+        "ubicacion": generate_location(),
         "dispositivo_usado": "DISP" + str(random.randint(1, 10000)),
         "cuenta_destino": cuenta["id_cuenta"]
     }
@@ -43,7 +43,7 @@ def generate_device():
     return {
         "id_dispositivo": "DISP" + str(random.randint(1, 10000)),
         "tipo_dispositivo": random.choice(tipos_dispositivo),
-        "ubicacion_registrada": fake.city()
+        "ubicacion_registrada": generate_location()
     }
 
 def generate_location():
