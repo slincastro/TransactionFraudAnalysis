@@ -5,26 +5,26 @@ from datetime import datetime, timedelta
 
 fake = Faker()
 
-def generate_account():
-    tipos_cuenta = ["cuenta corriente", "cuenta de ahorros", "cuenta empresarial"]
-    return {
-        "id_cuenta": "AC" + str(random.randint(100000000, 999999999)),
-        "tipo_cuenta": random.choice(tipos_cuenta),
-        "fecha_creacion": (datetime.now() - timedelta(days=random.randint(365, 365*5))).isoformat()
-    }
+def generate_user_account_pairs(num_pairs):
+    user_account_pairs = []
+    for _ in range(num_pairs):
+        user = {
+            "id_usuario": "USR" + str(random.randint(10000, 99999)),
+            "nombre": fake.name(),
+            "direccion": fake.address(),
+            "telefono": fake.phone_number(),
+            "email": fake.email()
+        }
+        account = {
+            "id_cuenta": "AC" + str(random.randint(100000000, 999999999)),
+            "tipo_cuenta": random.choice(["cuenta corriente", "cuenta de ahorros", "cuenta empresarial"]),
+            "fecha_creacion": fake.date_between(start_date='-5y', end_date='today').isoformat()
+        }
+        user_account_pairs.append((user, account))
+    return user_account_pairs
 
-def generate_user():
-    return {
-        "id_usuario": "USR" + str(random.randint(10000, 99999)),
-        "nombre": fake.name(),
-        "direccion": generate_location(),
-        "telefono": fake.phone_number(),
-        "email": fake.email()
-    }
-    
-# Predefinir 10 usuarios y cuentas
-usuarios = [generate_user() for _ in range(10)]
-cuentas = [generate_account() for _ in range(10)]
+# Assuming you want to create 10 consistent user-account pairs
+user_account_pairs = generate_user_account_pairs(10)
 
 def generate_transaction(usuario, cuenta):
     tipos_transaccion = ["depósito", "retiro", "pago", "transferencia"]
@@ -33,7 +33,7 @@ def generate_transaction(usuario, cuenta):
         "monto": round(random.uniform(100, 10000), 2),
         "fecha_hora": (datetime.now() - timedelta(days=random.randint(1, 365))).isoformat(),
         "tipo_transaccion": random.choice(tipos_transaccion),
-        "ubicacion": generate_location(),
+        "ubicacion": generate_location()["ciudad"],
         "dispositivo_usado": "DISP" + str(random.randint(1, 10000)),
         "cuenta_destino": cuenta["id_cuenta"]
     }
@@ -43,7 +43,7 @@ def generate_device():
     return {
         "id_dispositivo": "DISP" + str(random.randint(1, 10000)),
         "tipo_dispositivo": random.choice(tipos_dispositivo),
-        "ubicacion_registrada": generate_location()
+        "ubicacion_registrada": generate_location()["ciudad"]
     }
 
 def generate_location():
@@ -71,12 +71,12 @@ def generate_location():
         ("El Carmen", "-0.2662036,-79.455487"),
         ("Azogues", "-2.739735,-78.846489"),
         ("Guaranda", "-1.6086139,-79.0005645"),
-        ("Sucúa", "-2.468191,-78.166504"),
+        ("Sucua", "-2.468191,-78.166504"),
         ("Puyo", "-1.492392,-78.0024135"),
         ("Nueva Loja", "0.084047,-76.8823242"),
         ("Samborondón", "-1.9628752,-79.7242159"),
         ("Macas", "-2.3095065,-78.1116327"),
-        ("Tulcán", "0.8095047,-77.7173068"),
+        ("Tulcan", "0.8095047,-77.7173068"),
         ("Sangolquí", "-0.3126313,-78.4453967"),
         ("Pasaje", "-3.3343513,-79.8167435"),
         ("Santa Rosa", "-3.4517923,-79.9603016"),
@@ -94,7 +94,7 @@ def generate_location():
         ("Puerto Francisco de Orellana", "-0.462203,-76.993107"),
         ("Santa Elena", "-2.226890,-80.858732"),
         ("Santa Ana", "-1.222042,-80.385391"),
-        ("Pujilí", "-0.950764,-78.684171"),
+        ("Pujili", "-0.950764,-78.684171"),
         ("Montalvo", "-1.794189,-79.333222"),
         ("Pedro Carbo", "-1.819475,-80.237418"),
         ("San Miguel", "-1.699519,-78.97844"),
@@ -105,7 +105,7 @@ def generate_location():
         ("Cayambe", "0.050653,-78.155371"),
         ("Gualaceo", "-2.88566,-78.775955"),
         ("Naranjal", "-2.66998,-79.6213"),
-        ("Alausí", "-2.19793,-78.846619"),
+        ("Alausi", "-2.19793,-78.846619"),
         ("Naranjito", "-2.215687,-79.466897"),
         ("Velasco Ibarra", "-1.045301,-79.638737")
     ]
@@ -118,12 +118,10 @@ def generate_location():
         "coordenadas": coordenadas
     }
 
-def generate_records(num_records):
+def generate_records(num_records, user_account_pairs):
     data = []
-    for i in range(num_records):
-        # Rotar sobre los usuarios y cuentas predefinidos
-        usuario = usuarios[i % len(usuarios)]
-        cuenta = cuentas[i % len(cuentas)]
+    for _ in range(num_records):
+        usuario, cuenta = random.choice(user_account_pairs)  # Select a random user-account pair
         record = {
             "Transaccion": generate_transaction(usuario, cuenta),
             "Cuenta": cuenta,
@@ -135,10 +133,12 @@ def generate_records(num_records):
     return data
 
 def main(num_records, filename='data.json'):
-    records = generate_records(num_records)
+    records = generate_records(100, user_account_pairs)
     with open(filename, 'w') as f:
         json.dump(records, f, indent=4)
 
 if __name__ == "__main__":
-    documents_to_insert = 500  # Generar 100 documentos que rotan entre 10 usuarios y cuentas
+    documents_to_insert = 1000  
     main(documents_to_insert)
+
+
