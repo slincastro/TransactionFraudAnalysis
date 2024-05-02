@@ -7,12 +7,12 @@ python3 init_data/specific_users_generation.py
 echo " ."
 echo " .."
 echo " Ingestando data desde el archivo json hacia MongoDB"
-python3 data_ingestion/ingest.py 
-python3 data_ingestion/verification.py 
+python3 data_ingestion/documental/ingest.py 
+python3 data_ingestion/documental/verification.py 
 echo " ."
 echo " .."
 echo " Ingestando data desde mongo db hacia Neo4j"
-python3 graph/financial_etl.py
+python3 data_ingestion/graph/ingest.py
 echo " ."
 echo " .."
 echo "Verificar los resultados en http://localhost:7474/browser/"

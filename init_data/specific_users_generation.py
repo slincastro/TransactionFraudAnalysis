@@ -161,8 +161,8 @@ def get_total_inserted_rows():
 if __name__ == "__main__":
     documents_to_insert = 1000  
     
-    records = get_records(1000,15)
-    records.append(get_records(1000, 150))
+    records = get_records(10,2)
+    records.extend(get_records(10, 5))
     main(records)
     get_total_inserted_rows()
 

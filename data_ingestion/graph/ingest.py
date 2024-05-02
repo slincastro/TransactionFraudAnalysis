@@ -1,5 +1,13 @@
 from pymongo import MongoClient
 from neo4j import GraphDatabase
+import yaml
+
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
+
+uri = config['neo4j']['uri']
+username = config['neo4j']['username']
+password = config['neo4j']['password']
 
 def get_mongodb_collection():
     client = MongoClient("mongodb://admin:password@localhost:27017/")
@@ -7,7 +15,7 @@ def get_mongodb_collection():
     return db['transaction_collection']
 
 def get_neo4j_session():
-    driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "password"))
+    driver = GraphDatabase.driver(uri, auth=(username, password))
     return driver.session()
 
 def read_data_from_mongodb(collection):
