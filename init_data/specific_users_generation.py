@@ -2,51 +2,12 @@ import json
 import random
 from faker import Faker
 from datetime import datetime, timedelta
+from geopy.distance import geodesic
+import heapq 
 
 fake = Faker()
 
-def generate_user_account_pairs(num_pairs):
-    user_account_pairs = []
-    for _ in range(num_pairs):
-        user = {
-            "id_usuario": "USR" + str(random.randint(10000, 99999)),
-            "nombre": fake.name(),
-            "direccion": fake.address(),
-            "telefono": fake.phone_number(),
-            "email": fake.email()
-        }
-        account = {
-            "id_cuenta": "AC" + str(random.randint(100000000, 999999999)),
-            "tipo_cuenta": random.choice(["cuenta corriente", "cuenta de ahorros", "cuenta empresarial"]),
-            "fecha_creacion": fake.date_between(start_date='-5y', end_date='today').isoformat()
-        }
-        user_account_pairs.append((user, account))
-    return user_account_pairs
-
-
-def generate_transaction(usuario, cuenta):
-    tipos_transaccion = ["depósito", "retiro", "pago", "transferencia"]
-    return {
-        "id_transaccion": "TX" + str(random.randint(100000000, 999999999)),
-        "monto": round(random.uniform(100, 10000), 2),
-        "fecha_hora": (datetime.now() - timedelta(days=random.randint(1, 365))).isoformat(),
-        "tipo_transaccion": random.choice(tipos_transaccion),
-        "ubicacion": generate_location()["ciudad"],
-        "dispositivo_usado": "DISP" + str(random.randint(1, 10000)),
-        "cuenta_destino": cuenta["id_cuenta"]
-    }
-
-def generate_device():
-    tipos_dispositivo = ["teléfono", "computadora", "tablet"]
-    return {
-        "id_dispositivo": "DISP" + str(random.randint(1, 10000)),
-        "tipo_dispositivo": random.choice(tipos_dispositivo),
-        "ubicacion_registrada": generate_location()["ciudad"]
-    }
-
-def generate_location():
-    
-    ciudades_ecuador = [
+cities = [
         ("Quito", "-0.1806532,-78.4678382"),
         ("Guayaquil", "-2.1709979,-79.9223592"),
         ("Cuenca", "-2.9001285,-79.0058965"),
@@ -108,7 +69,82 @@ def generate_location():
         ("Velasco Ibarra", "-1.045301,-79.638737")
     ]
 
-    ciudad, coordenadas = random.choice(ciudades_ecuador)
+
+def find_nearest_cities(city_name, num_cities=3):
+    target = None
+
+    for city, coords in cities:
+        if city == city_name:
+            target = coords
+            break
+    
+    if not target:
+        return f"No data for city: {city_name}"
+
+    distances = []
+    target_coords = tuple(map(float, target.split(',')))
+    
+    for city, coords in cities:
+        if city != city_name:
+            city_coords = tuple(map(float, coords.split(',')))
+            distance = geodesic(target_coords, city_coords).kilometers
+            distances.append((distance, city))
+    
+    closest_cities = heapq.nsmallest(num_cities, distances)
+    
+    return random.choice(closest_cities)[1]
+
+def generate_user_account_pairs(num_pairs):
+    user_account_pairs = []
+    for _ in range(num_pairs):
+        user = {
+            "id_usuario": "USR" + str(random.randint(10000, 99999)),
+            "nombre": fake.name(),
+            "direccion": fake.address(),
+            "telefono": fake.phone_number(),
+            "email": fake.email(),
+            "ciudad": generate_location()["ciudad"]
+        }
+        account = {
+            "id_cuenta": "AC" + str(random.randint(100000000, 999999999)),
+            "tipo_cuenta": random.choice(["cuenta corriente", "cuenta de ahorros", "cuenta empresarial"]),
+            "fecha_creacion": fake.date_between(start_date='-5y', end_date='today').isoformat()
+        }
+        user_account_pairs.append((user, account))
+    return user_account_pairs
+
+def generate_amount():
+
+    if random.random() < 0.02:
+        number = random.uniform(100000, 2000000)  
+    else:
+        number = random.uniform(100, 10000)
+    
+    return round(number, 2)
+
+def generate_transaction(usuario, cuenta):
+    tipos_transaccion = ["deposito", "retiro", "pago", "transferencia"]
+    return {
+        "id_transaccion": "TX" + str(random.randint(100000000, 999999999)),
+        "monto": generate_amount(),
+        "fecha_hora": (datetime.now() - timedelta(days=random.randint(1, 365))).isoformat(),
+        "tipo_transaccion": random.choice(tipos_transaccion),
+        "ubicacion": find_nearest_cities(usuario["ciudad"]),
+        "dispositivo_usado": "DISP" + str(random.randint(1, 10000)),
+        "cuenta_destino": cuenta["id_cuenta"]
+    }
+
+def generate_device():
+    tipos_dispositivo = ["teléfono", "computadora", "tablet"]
+    return {
+        "id_dispositivo": "DISP" + str(random.randint(1, 10000)),
+        "tipo_dispositivo": random.choice(tipos_dispositivo),
+        "ubicacion_registrada": generate_location()["ciudad"]
+    }
+
+def generate_location():
+    
+    ciudad, coordenadas = random.choice(cities)
 
     return {
         "ciudad": ciudad,
@@ -161,8 +197,8 @@ def get_total_inserted_rows():
 if __name__ == "__main__":
     documents_to_insert = 1000  
     
-    records = get_records(10,2)
-    records.extend(get_records(10, 5))
+    records = get_records(100,20)
+    records.extend(get_records(100, 5))
     main(records)
     get_total_inserted_rows()
 
