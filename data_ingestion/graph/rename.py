@@ -15,7 +15,6 @@ def read_data_from_mongodb(collection):
 
 def insert_data_into_neo4j(session, data):
     for item in data:
-        print(".")
         session.run("""
         MERGE (u:Usuario {id_usuario: $Usuario.id_usuario})
         ON CREATE SET u.nombre = $Usuario.nombre, u.direccion = $Usuario.direccion, u.telefono = $Usuario.telefono, u.email = $Usuario.email

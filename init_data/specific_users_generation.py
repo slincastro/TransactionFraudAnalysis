@@ -23,8 +23,6 @@ def generate_user_account_pairs(num_pairs):
         user_account_pairs.append((user, account))
     return user_account_pairs
 
-# Assuming you want to create 10 consistent user-account pairs
-user_account_pairs = generate_user_account_pairs(10)
 
 def generate_transaction(usuario, cuenta):
     tipos_transaccion = ["depósito", "retiro", "pago", "transferencia"]
@@ -132,13 +130,40 @@ def generate_records(num_records, user_account_pairs):
         data.append(record)
     return data
 
-def main(num_records, filename='data.json'):
-    records = generate_records(100, user_account_pairs)
+
+def get_records(num_records, num_users):
+    user_account_pairs = generate_user_account_pairs(num_users)
+    records = generate_records(num_records, user_account_pairs)
+    return records
+
+def main(records, filename='data.json'):   
     with open(filename, 'w') as f:
         json.dump(records, f, indent=4)
+        
+def get_total_inserted_rows():
+    
+    filename = 'data.json'
+    
+    try:
+        with open(filename, 'r') as file:
+            data = json.load(file) 
+            record_count = len(data)
+            print(f"Se encontraron {record_count} objetos")
+    except FileNotFoundError:
+        print("File not found.")
+    except json.JSONDecodeError as error:
+        print(f"Error: El contenido del archivo no es un JSON válido. {error}")
+    except Exception as error:  
+        print(f"Ocurrió un error inesperado: {error}")
+
+
 
 if __name__ == "__main__":
     documents_to_insert = 1000  
-    main(documents_to_insert)
+    
+    records = get_records(1000,15)
+    records.append(get_records(1000, 150))
+    main(records)
+    get_total_inserted_rows()
 
 
