@@ -3,7 +3,7 @@ echo " Generando ingesta de data - UHE - Slin Castro"
 echo " ."
 echo " .."
 echo " Generando data Transaccional en Data.json"
-python3 init_data/specific_users_generation.py
+python3 init_data/generate_transactions.py
 echo " ."
 echo " .."
 echo " Ingestando data desde el archivo json hacia MongoDB"

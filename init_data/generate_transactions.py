@@ -69,6 +69,7 @@ cities = [
         ("Velasco Ibarra", "-1.045301,-79.638737")
     ]
 
+devices = []
 
 def find_nearest_cities(city_name, num_cities=3):
     target = None
@@ -103,7 +104,8 @@ def generate_user_account_pairs(num_pairs):
             "direccion": fake.address(),
             "telefono": fake.phone_number(),
             "email": fake.email(),
-            "ciudad": generate_location()["ciudad"]
+            "ciudad": generate_location()["ciudad"],
+            "dispositivo": generate_device()["id_dispositivo"]
         }
         account = {
             "id_cuenta": "AC" + str(random.randint(100000000, 999999999)),
@@ -130,17 +132,27 @@ def generate_transaction(usuario, cuenta):
         "fecha_hora": (datetime.now() - timedelta(days=random.randint(1, 365))).isoformat(),
         "tipo_transaccion": random.choice(tipos_transaccion),
         "ubicacion": find_nearest_cities(usuario["ciudad"]),
-        "dispositivo_usado": "DISP" + str(random.randint(1, 10000)),
+        "dispositivo_usado": usuario["dispositivo"],
         "cuenta_destino": cuenta["id_cuenta"]
     }
 
 def generate_device():
     tipos_dispositivo = ["teléfono", "computadora", "tablet"]
-    return {
+    
+    device = {
         "id_dispositivo": "DISP" + str(random.randint(1, 10000)),
-        "tipo_dispositivo": random.choice(tipos_dispositivo),
-        "ubicacion_registrada": generate_location()["ciudad"]
+        "tipo_dispositivo": random.choice(tipos_dispositivo)
     }
+    devices.append(device)
+    
+    return device
+
+def get_device_by_id(id):
+    for dispositivo in devices:
+        if dispositivo["id_dispositivo"] == id:
+            return dispositivo
+    return None
+
 
 def generate_location():
     
@@ -155,12 +167,12 @@ def generate_location():
 def generate_records(num_records, user_account_pairs):
     data = []
     for _ in range(num_records):
-        usuario, cuenta = random.choice(user_account_pairs)  # Select a random user-account pair
+        usuario, cuenta = random.choice(user_account_pairs)  
         record = {
             "Transaccion": generate_transaction(usuario, cuenta),
             "Cuenta": cuenta,
             "Usuario": usuario,
-            "Dispositivo": generate_device(),
+            "Dispositivo": get_device_by_id(usuario["dispositivo"]) ,
             "Ubicacion": generate_location()
         }
         data.append(record)
@@ -199,6 +211,8 @@ if __name__ == "__main__":
     
     records = get_records(100,20)
     records.extend(get_records(100, 5))
+    records.extend(get_records(1000, 10))
+    records.extend(get_records(2000, 3))
     main(records)
     get_total_inserted_rows()
 

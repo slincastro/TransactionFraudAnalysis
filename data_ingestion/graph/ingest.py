@@ -8,11 +8,14 @@ with open('config.yaml', 'r') as file:
 uri = config['neo4j']['uri']
 username = config['neo4j']['username']
 password = config['neo4j']['password']
+mongo_client_uri = config['mongodb']['client_uri']
+db_name = config['mongodb']['db_name']
+collection_name = config['mongodb']['collection_name']
 
 def get_mongodb_collection():
-    client = MongoClient("mongodb://admin:password@localhost:27017/")
-    db = client['transactions']
-    return db['transaction_collection']
+    client = MongoClient(mongo_client_uri)
+    db = client[db_name]
+    return db[collection_name]
 
 def get_neo4j_session():
     driver = GraphDatabase.driver(uri, auth=(username, password))
@@ -48,6 +51,8 @@ def insert_data_into_neo4j(session, data):
         MERGE (t)-[:A_CUENTA]->(c2)
         MERGE (u)-[:POSEE]->(c1)
         MERGE (t)-[:UTILIZA]->(d)
+        MERGE (t)-[:EJECUTADA_EN]->(l)
+        MERGE (u)-[:MEDIANTE]->(d)
         """, {
             "Usuario": item['Usuario'],
             "Transaccion": item['Transaccion'],

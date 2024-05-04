@@ -2,3 +2,7 @@ neo4j:
   uri: "bolt://localhost:7687"
   username: "neo4j"
   password: "password"
+mongodb:
+  client_uri: "mongodb://admin:password@localhost:27017/"
+  db_name: "transactions"
+  collection_name: "transaction_collection"
