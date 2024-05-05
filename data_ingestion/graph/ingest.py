@@ -32,7 +32,7 @@ def insert_data_into_neo4j(session, data):
 
         MERGE (t:Transaccion {id_transaccion: $Transaccion.id_transaccion})
         ON CREATE SET t.monto = $Transaccion.monto, t.fecha_hora = $Transaccion.fecha_hora, t.tipo_transaccion = $Transaccion.tipo_transaccion, 
-                        t.ubicacion = $Transaccion.ubicacion, t.dispositivo_usado = $Transaccion.dispositivo_usado
+                        t.ubicacion = $Transaccion.ubicacion, t.dispositivo_usado = $Transaccion.dispositivo_usado, t.cuenta_destino = $Transaccion.cuenta_destino
 
         MERGE (c1:Cuenta {id_cuenta: $Cuenta.id_cuenta})
         ON CREATE SET c1.tipo_cuenta = $Cuenta.tipo_cuenta, c1.fecha_creacion = $Cuenta.fecha_creacion

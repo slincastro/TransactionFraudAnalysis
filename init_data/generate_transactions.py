@@ -70,6 +70,7 @@ cities = [
     ]
 
 devices = []
+accounts = []
 
 def find_nearest_cities(city_name, num_cities=3):
     target = None
@@ -112,6 +113,7 @@ def generate_user_account_pairs(num_pairs):
             "tipo_cuenta": random.choice(["cuenta corriente", "cuenta de ahorros", "cuenta empresarial"]),
             "fecha_creacion": fake.date_between(start_date='-5y', end_date='today').isoformat()
         }
+        accounts.append(account)
         user_account_pairs.append((user, account))
     return user_account_pairs
 
@@ -133,7 +135,7 @@ def generate_transaction(usuario, cuenta):
         "tipo_transaccion": random.choice(tipos_transaccion),
         "ubicacion": find_nearest_cities(usuario["ciudad"]),
         "dispositivo_usado": usuario["dispositivo"],
-        "cuenta_destino": cuenta["id_cuenta"]
+        "cuenta_destino": random.choice(accounts)["id_cuenta"]
     }
 
 def generate_device():
@@ -205,7 +207,6 @@ def get_total_inserted_rows():
         print(f"Ocurrió un error inesperado: {error}")
 
 
-
 if __name__ == "__main__":
     documents_to_insert = 1000  
     
@@ -213,6 +214,8 @@ if __name__ == "__main__":
     records.extend(get_records(100, 5))
     records.extend(get_records(1000, 10))
     records.extend(get_records(2000, 3))
+    records.extend(get_records(1000, 50))
+    records.extend(get_records(2000, 500))
     main(records)
     get_total_inserted_rows()
 
